@@ -5,9 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public Transform groundCheck;
-    public LayerMask groundLayer;
+    public Rigidbody2D Rb;
+    public Transform GroundCheck;
+    public LayerMask GroundLayer;
 
     private float horizontal;
     private float speed = 8f;
@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        Rb.velocity = new Vector2(horizontal * speed, Rb.velocity.y);
 
         if (!isFacingRight && horizontal > 0f)
         {
@@ -39,18 +39,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.performed && isGrounded())
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            Rb.velocity = new Vector2(Rb.velocity.x, jumpingPower);
         }
 
-        if (context.canceled && rb.velocity.y > 0f)
+        if (context.canceled && Rb.velocity.y > 0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            Rb.velocity = new Vector2(Rb.velocity.x, Rb.velocity.y * 0.5f);
         }
     }
 
     private bool isGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        return Physics2D.OverlapCircle(GroundCheck.position, 0.2f, GroundLayer);
     }
 
     private void Flip()
